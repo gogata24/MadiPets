@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+table{
+    color: white;
+}
+nav {
+    background-color: #336699; /* Replace with your desired color */
+    color: #FFFFFF;
+}
+body {
+    background: linear-gradient(90deg, #ff6b6b, #355c7d);
+    margin-bottom: 60px;
+    color: white;
+}
+.text-center{
+    color: black;
+}
+label{
+    color: black;
+}

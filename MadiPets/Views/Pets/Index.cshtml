@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MadiPets.Models.Pets>
+@using MadiPets.HelpingTool
+@{
+    ViewData["Title"] = "Pets";
+}
+
+<h1>Pets</h1>
+
+<p>
+    <a asp-action="Create">Add your pet </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h6> @Html.DisplayNameFor(model => model.Name)</h6>
+            </th>
+            <th>
+                <h6> @Html.DisplayNameFor(model => model.Description)</h6>
+            </th>
+            <th>
+               <h6>@Html.DisplayNameFor(model => model.Gender)</h6>
+            </th>
+            <th>
+                <h6>Image of pet</h6>
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" width="150px" height="100px">
+            </td>
+                @if (Logged.Login.Username == "admin")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
+            </td>
+            }
+            else
+            @if(Logged.User.UserId== item.UserId)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
+                    </td>
+                }
+            </tr>
+}
+    </tbody>
+</table>

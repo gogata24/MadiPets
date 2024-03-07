@@ -1,0 +1,96 @@
+﻿@model MadiPets.ViewModel.PetsFormViewModel
+@using MadiPets.HelpingTool
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card-pet-create">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            <!-- Title Field -->
+                            <div class="form-group">
+                                <label for="title">Name</label>
+                                <input type="text"
+                                       name="Name"
+                                       class="form-control"
+                                       id=""
+                                       placeholder="Enter pet Name"
+                                       required>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="image">Upload Image</label>
+                                <input type="file" name="Image" class="form-control-file" id="Image" accept="image/*">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Описание</label>
+                                <input type="text"
+                                       name="Description"
+                                       class="form-control"
+                                       id="Description"
+                                       placeholder="Description"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Gender">Пол</label>
+                                <select class="form-control" id="Gender" name="Gender">
+                                    <option value="Мъжко">Мъжко</option>
+                                    <option value="Женско">Женско</option>
+                                </select>
+
+                            </div>
+                          
+
+                                <div class="form-group">
+                                    <label for="brand">
+                                        User
+                                    </label>
+                                    
+                                    <select class="form-control" id="UserId" name="UserId">
+                                    @if (Logged.Login.Username == "admin")
+                                    {
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            <option value="@user.UserId">@user.Email</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            if (user.UserId == Logged.User.UserId)
+                                            {
+                                                <option value="@user.UserId">@user.Email</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="brand">
+                                    Type
+                                </label>
+                                <select class="form-control" id="TypeId" name="TypeId">
+                                    @foreach (var type in Model.Types)
+                                    {                                        
+                                            <option value="@type.TypeId">@type.Type</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Add pet
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

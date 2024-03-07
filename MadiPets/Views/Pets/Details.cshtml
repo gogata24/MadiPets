@@ -1,0 +1,72 @@
+﻿@model MadiPets.Models.Pets
+@using MadiPets.Db
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pets</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <h6>Категория</h6>
+        </dt>
+        @{
+            using(var db = new MadiPets.Db.MadiPetsDbContext())
+            {
+                var type = db.Types.FirstOrDefault(x => x.TypeId == Model.TypeId);
+
+                <dd class="col-sm-10">
+                    <h4>@type.Type</h4>
+                </dd>
+
+            }
+         }
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            <h6>Photo</h6>
+        </dt>
+        <dd class = "col-sm-10">
+           <img src=" @Html.DisplayFor(model => model.ImagePath)" height="100px" width="150px"/>
+        </dd>
+        <dt class="col-sm-2">
+            <h4>Email</h4>
+        </dt>
+        @{
+            using(var db = new MadiPets.Db.MadiPetsDbContext())
+            {
+                var user = db.Users.FirstOrDefault(x => x.UserId == Model.UserId);
+
+                <dd class="col-sm-10">
+                    <h4>@user.Email</h4>
+                </dd>
+
+            }
+        
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
